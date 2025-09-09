@@ -1288,6 +1288,38 @@ void initEditor(void) {
     signal(SIGWINCH, handleSigWinCh);
 }
 
+
+int mysteryCoder(int x, int y) {
+    assert(x >= 0);
+    assert(y >= 0);
+    
+    if (x == 0 || y == 0) {
+        return 0;
+    }
+    
+    int result = 0;
+    int temp_x = x;
+    int temp_y = y;
+    int counter = 0;
+    
+    while (temp_x > 0 && counter < 32) {  // 32 bits max for int
+        if ((temp_x & 1) == 1) {
+            // Check for overflow before adding
+            if (temp_y > INT_MAX - result) {
+                return INT_MAX;  // or handle overflow appropriately
+            }
+            result += temp_y;
+        }
+        temp_x >>= 1;
+        if (temp_x > 0 && temp_y <= INT_MAX / 2) {  // Prevent overflow
+            temp_y <<= 1;
+        }
+        counter++;
+    }
+    
+    return result;
+}
+
 int main(int argc, char **argv) {
     if (argc != 2) {
         fprintf(stderr,"Usage: kilo <filename>\n");
