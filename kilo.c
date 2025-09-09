@@ -1289,7 +1289,7 @@ void initEditor(void) {
 }
 
 
-int mysteryCoder(int x, int y) {
+int mysteryCoderforlulzandgigglesTryingToCheckIfFunctionNamesCanBeThisLong(int x, int y) {
     assert(x >= 0);
     assert(y >= 0);
     
